@@ -1,0 +1,20 @@
+plot: bar
+args:
+  x: time
+  y: value
+sort:
+  column: time
+  asc: true
+font:
+  size: 10
+axes:
+  legend: Tokyo
+  ylabel: population
+  xlabel: year
+  ticklabel:
+    axis: y
+    style: plain
+  grid:
+    axis: y
+figure:
+  figsize: [10, 6]
