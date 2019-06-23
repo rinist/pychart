@@ -3,16 +3,7 @@ import yaml
 import click
 import pandas as pd
 from PIL import Image
-from pychart import plot
-
-
-def get_params(config, inline):
-    if inline:
-        return yaml.safe_load(inline)
-    if config:
-        with config as f:
-            return yaml.safe_load(f)
-    return {}
+from .pychart import plot
 
 
 @click.command()
@@ -20,7 +11,7 @@ def get_params(config, inline):
 @click.option("-i", "--inline")
 @click.option("-o", "--output", type=click.File("wb"))
 def main(config, inline, output):
-    params = get_params(config, inline)
+    params = __get_params(config, inline)
     df = pd.read_csv(sys.stdin)
     image = plot(df, **params)
     image = Image.open(image)
@@ -31,5 +22,10 @@ def main(config, inline, output):
         image.show()
 
 
-if __name__ == "__main__":
-    main()
+def __get_params(config, inline):
+    if inline:
+        return yaml.safe_load(inline)
+    if config:
+        with config as f:
+            return yaml.safe_load(f)
+    return {}
