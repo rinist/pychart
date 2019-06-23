@@ -1,5 +1,7 @@
 __pycache__/
 .eggs/
 *.egg-info/
+Pipfile.lock
+
 .venv
 .vscode
